@@ -14,23 +14,23 @@ There are essentially two files required by the program. A <B>commands.csv</B> f
 
 The commands.csv file should have three headers - ID,TEXT,AGENT.
 
-	1. TEXT contains the service commands.
-	2. ID is the unique ID of each service command.
-	3. AGENT is the service tag which indicates what the user intended.
+1. TEXT contains the service commands.
+2. ID is the unique ID of each service command.
+3. AGENT is the service tag which indicates what the user intended.
 
 The entities.csv file should have four headers - ID,ENTITY,START,END.
 
-	1. ID is the ID of the service call in commmands.csv. In this case, it is NOT UNIQUE because a single sentence can have multiple entities.
-	2. ENTITY is the entity tag.
-	3. START & END specify the range within which the particular entity is present
+1. ID is the ID of the service call in commmands.csv. In this case, it is NOT UNIQUE because a single sentence can have multiple entities.
+2. ENTITY is the entity tag.
+3. START & END specify the range within which the particular entity is present
 
 
-# PROJECT DESCRIPTION
+# Project Description
 
 The NLP Pipeline consists of 3 sequential steps - Novelty detection, Text Classification and Named Entity Recognition using MITIE library.
 
-	1. The Novelty Detection module is used to find out outliers, which in our case are sentences which are not relevant to our services/not a service call. If 		relevant, we return +1 and call the text classification. The novelty detection is created using oneClassSVM algorithm.
+1. The Novelty Detection module is used to find out outliers, which in our case are sentences which are not relevant to our services/not a service call. If relevant, we return +1 and call the text classification. The novelty detection is created using oneClassSVM algorithm.
 	
-	2. The Text Classification classifies the text from the user into pre-defined services. The Text Classification uses a standard SVM, the parameters of which have 		been optimized using GridSearchCV, with a custom vectorizer that uses sentence word vectors, calculated by averaging the word vectord of each word. The word 		vectors of the words are calculated used the gensim module(refer to the word_vectors.py file for more details).
+2. The Text Classification classifies the text from the user into pre-defined services. The Text Classification uses a standard SVM, the parameters of which have been optimized using GridSearchCV, with a custom vectorizer that uses sentence word vectors, calculated by averaging the word vectord of each word. The word vectors of the words are calculated used the gensim module(refer to the word_vectors.py file for more details).
 
-	3. The Named Entity Recognition module uses the MITIE system, the bare essential requirements of which are present in the lib folder. Each service requires it's 		own NER model.
+3. The Named Entity Recognition module uses the MITIE system, the bare essential requirements of which are present in the lib folder. Each service requires it's own NER model.
